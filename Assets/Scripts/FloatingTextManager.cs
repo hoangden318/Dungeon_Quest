@@ -24,11 +24,11 @@ public class FloatingTextManager : MonoBehaviour
         floatingText.txt.text = msg;
         floatingText.txt.fontSize = fontSize;
         floatingText.txt.color = color;
-        floatingText.obj.transform.position = Camera.main.ScreenToWorldPoint(pos);
+        floatingText.obj.transform.position = Camera.main.WorldToScreenPoint(pos);
         floatingText.motion = motion;
         floatingText.duration = duration;
 
-        floatingText.Show();
+        floatingText.ShowT();
     }
     private FloatingText GetFloatingText()
     {
@@ -39,7 +39,7 @@ public class FloatingTextManager : MonoBehaviour
             ftxt = new FloatingText();
             ftxt.obj = Instantiate(textPrefabs);
             ftxt.obj.transform.SetParent(textContainer.transform);
-            ftxt.txt = GetComponent<Text>();
+            ftxt.txt = ftxt.obj.GetComponent<Text>();
 
             floatingTexts.Add(ftxt);
         }

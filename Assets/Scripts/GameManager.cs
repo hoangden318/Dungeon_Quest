@@ -30,10 +30,16 @@ public class GameManager : MonoBehaviour
     //Reference
     public Player player;
     
+    public FloatingTextManager floatingTextManager;
     //Logic
     public int gold;
     public int experience;
 
+    //floating Text
+    public void ShowText(string msg, int fontSize, Color color, Vector3 pos, Vector3 motion, float duration)
+    {
+        floatingTextManager.Show(msg, fontSize, color, pos, motion, duration);
+    }
     //save
     /* int prefered Skin
      * int gold

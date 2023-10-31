@@ -10,9 +10,10 @@ public class FloatingText
     public float duration;
     public float lastShown;
 
-    public void Show()
+    public void ShowT()
     {
         active = true;
+        lastShown = Time.time;
         obj.SetActive(active);
     }
     public void Hide()
@@ -25,7 +26,7 @@ public class FloatingText
     {
         if (!active) return;
 
-        if(Time.time > lastShown + duration) Hide();
+        if(Time.time - lastShown >  duration) Hide();
 
         obj.transform.position += motion * Time.deltaTime;
 

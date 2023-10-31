@@ -26,7 +26,7 @@ public class Collidable : MonoBehaviour
         for (int i = 0; i < hits.Length; i++)
         {
             if (hits[i] == null)
-                continue;
+                return;
 
             OnCollide(hits[i]);
             //array is not cleaned up, we do it ourself
