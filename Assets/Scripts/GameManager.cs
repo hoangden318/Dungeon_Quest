@@ -12,11 +12,16 @@ public class GameManager : MonoBehaviour
         if (instance != null)
         {
             Destroy(gameObject);
+            Destroy(player.gameObject);
+            Destroy(floatingTextManager.gameObject);
+            Destroy(hud.gameObject);
+            Destroy(menu.gameObject);
             return;
         }
         instance = this;
         SceneManager.sceneLoaded += LoadState;
-        DontDestroyOnLoad(gameObject);
+        SceneManager.sceneLoaded += OnSceneLoaded;
+        
         
     }
 
@@ -31,6 +36,10 @@ public class GameManager : MonoBehaviour
     public Weapon weapon;
     
     public FloatingTextManager floatingTextManager;
+    public RectTransform healthBar;
+
+    public GameObject hud;
+    public GameObject menu;
     //Logic
     public int gold;
     public int experience;
@@ -103,13 +112,19 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("Level up!");
         player.OnLevelUp();
+        this.OnHitPointChange();
     }    
-    //save
-    /* int prefered Skin
-     * int gold
-     * int experience
-     * int weapon Level
-     */
+    public void OnHitPointChange()
+    {
+        float ratioHeal = (float)player.hitPoints / (float)player.maxHitPoints;
+        healthBar.localScale = new Vector3(ratioHeal, 1, 1);
+    }
+
+    public void OnSceneLoaded(Scene s, LoadSceneMode mode)
+    {
+        //load Spawn points player
+        player.transform.position = GameObject.Find("SpawnPoints").transform.position;
+    }
     public void SaveState()
     {
         string s = " ";
@@ -119,11 +134,13 @@ public class GameManager : MonoBehaviour
         s += weapon.weaponLevel.ToString();
 
         PlayerPrefs.SetString("SaveState",s);
-        Debug.Log("SaveState");
+       
     }
 
     public void LoadState(Scene s, LoadSceneMode mode)
     {
+        SceneManager.sceneLoaded -= LoadState;
+
         if (!PlayerPrefs.HasKey("SaveState")) return;
 
         string[] data = PlayerPrefs.GetString("SaveState").Split('|');
@@ -131,11 +148,16 @@ public class GameManager : MonoBehaviour
         //change player skin
         //change player gold
         gold = int.Parse(data[1]);
+
         //change player exp
         experience = int.Parse(data[2]);
+        if(this.GetCurentLevel() != 1)
+            player.SetLevel(GetCurentLevel());
+
         //change player weaponLevel
         weapon.SetWeaponLevel(int.Parse(data[3]));
 
-        Debug.Log("LoadState");
+       
+        
     }
 }

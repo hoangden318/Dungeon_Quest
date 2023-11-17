@@ -7,7 +7,11 @@ public class CameraMotor : MonoBehaviour
     [SerializeField] protected Transform targetPlayer;
     [SerializeField] protected float boundX = 0.3f;
     [SerializeField] protected float boundY = 0.15f;
-     
+
+    private void Start()
+    {
+        targetPlayer = GameObject.Find("Player").transform;
+    }
     private void LateUpdate()
     {
         this.Following();
