@@ -5,7 +5,7 @@ using UnityEngine;
 public class Player : Mover
 {
     private SpriteRenderer spriteRenderer;
-
+    private bool isLive = true;
     protected override void Start()
     {
         base.Start();
@@ -15,15 +15,24 @@ public class Player : Mover
     }
     protected override void ReceiveDamage(Damage dmg)
     {
+        if (!isLive) return;
+
         base.ReceiveDamage(dmg);
         GameManager.instance.OnHitPointChange();
+    }
+
+    protected override void Death()
+    {
+        isLive = false;
+        GameManager.instance.deathMenuAnim.SetTrigger("show");
     }
     protected void FixedUpdate()
     {
         //this.MoveMent();
         float x = Input.GetAxisRaw("Horizontal");
         float y = Input.GetAxisRaw("Vertical");
-        UpdateMotor(new Vector3(x,y,0));
+        if(isLive)
+            UpdateMotor(new Vector3(x, y, 0));
     }
 
     public void SwapSprites(int skinId)
@@ -53,5 +62,12 @@ public class Player : Mover
 
         GameManager.instance.ShowText("+ " + healingAmount.ToString()+"hp",20, Color.red, transform.position, Vector3.up * 40, 1.0f);
         GameManager.instance.OnHitPointChange();
+    }
+    public void Respawn()
+    {
+        isLive = true;
+        this.Heal(maxHitPoints);
+        lastImmune = Time.time;
+        pushDirection = Vector3.zero;
     }
 }

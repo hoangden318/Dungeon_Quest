@@ -886,7 +886,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1083405863
-  m_SortingLayer: 2
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: -989889841, guid: 1eace890fd7a9254a815e3e8201d8c67, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -30522,7 +30522,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.005659133, y: -0.038552374}
+  m_Offset: {x: 0.012438297, y: -0.036292598}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -30533,7 +30533,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.26155192, y: 0.27324587}
+  m_Size: {x: 0.32030582, y: 0.33651993}
   m_EdgeRadius: 0
 --- !u!1 &1122695102
 GameObject:
@@ -30890,7 +30890,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1083405863
-  m_SortingLayer: 2
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: -989889841, guid: 1eace890fd7a9254a815e3e8201d8c67, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -35649,7 +35649,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.0042295903, y: -0.025322609}
+  m_Offset: {x: 0.004982695, y: -0.022309572}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -35660,7 +35660,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.20528322, y: 0.21857409}
+  m_Size: {x: 0.18268552, y: 0.18543053}
   m_EdgeRadius: 0
 --- !u!114 &1890613836
 MonoBehaviour:
@@ -35677,9 +35677,11 @@ MonoBehaviour:
   hitPoints: 10
   maxHitPoints: 10
   pushRecoverySpeed: 0.2
+  xSpeed: 0.6
+  ySpeed: 0.35
   expValue: 10
-  triggerLenght: 0.3
-  chaseLength: 1
+  triggerLenght: 0.7
+  chaseLength: 2.5
   contactFilter:
     useTriggers: 0
     useLayerMask: 0
@@ -35740,11 +35742,11 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1083405863
-  m_SortingLayer: 2
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: 1447351967, guid: 1eace890fd7a9254a815e3e8201d8c67, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
+  m_FlipX: 1
   m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 0.32323232, y: 0.32323232}

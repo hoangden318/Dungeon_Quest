@@ -3,7 +3,7 @@ using UnityEngine.SceneManagement;
 
 public class Portal : Collidable
 {
-    [SerializeField] protected string[] senceNames;
+    [SerializeField] protected string[] sceneNames;
     
     protected override void OnCollide(Collider2D coll)
     {
@@ -11,7 +11,7 @@ public class Portal : Collidable
         {
             GameManager.instance.SaveState();
             //teleport player
-            string scenceName = senceNames[Random.Range(0, senceNames.Length)];
+            string scenceName = sceneNames[Random.Range(0, sceneNames.Length)];
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex+1);
         }
     }

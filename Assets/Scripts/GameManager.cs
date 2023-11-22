@@ -24,7 +24,7 @@ public class GameManager : MonoBehaviour
         
         
     }
-
+    
     //Resources
     public List<Sprite> playerSprites;
     public List<Sprite> weaponSprites;
@@ -34,12 +34,15 @@ public class GameManager : MonoBehaviour
     //Reference
     public Player player;
     public Weapon weapon;
-    
+    public Enemy enemy;
+
     public FloatingTextManager floatingTextManager;
     public RectTransform healthBar;
+    public RectTransform healthBarEnemy;
 
     public GameObject hud;
     public GameObject menu;
+    public Animator deathMenuAnim;
     //Logic
     public int gold;
     public int experience;
@@ -114,16 +117,29 @@ public class GameManager : MonoBehaviour
         player.OnLevelUp();
         this.OnHitPointChange();
     }    
-    public void OnHitPointChange()
+    public virtual void OnHitPointChange()
     {
         float ratioHeal = (float)player.hitPoints / (float)player.maxHitPoints;
         healthBar.localScale = new Vector3(ratioHeal, 1, 1);
+    }
+    public void OnHitPointsEnenmyChange()
+    {
+        float ratioBar = (float)enemy.hitPoints / (float)enemy.maxHitPoints;
+        healthBarEnemy.localScale = new Vector3(ratioBar, 1, 1);
+
     }
 
     public void OnSceneLoaded(Scene s, LoadSceneMode mode)
     {
         //load Spawn points player
         player.transform.position = GameObject.Find("SpawnPoints").transform.position;
+    }
+    //Respawn player
+    public void Respawn()
+    {
+        GameManager.instance.deathMenuAnim.SetTrigger("hide");
+        SceneManager.LoadScene("Main");
+        player.Respawn();
     }
     public void SaveState()
     {

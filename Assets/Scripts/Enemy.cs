@@ -6,7 +6,7 @@ public class Enemy : Mover
 {
     //Experience
     public int expValue = 1;
-
+    //public Vector3 originScale;
     //Logic
     public float triggerLenght = 0.3f;
     public float chaseLength = 1.0f;
@@ -20,18 +20,50 @@ public class Enemy : Mover
     private BoxCollider2D hitBox;
     private Collider2D[] hits = new Collider2D[10];
 
+    //Patrol to WayPoints
+    public float speedToWaypoints;
+    public Transform waypoint1, waypoint2;
+    private Transform waypointTarget;
+    private SpriteRenderer sr;
     protected override void Start()
     {
         base.Start();
         playerTranform = GameManager.instance.player.transform;
         staringPosition = transform.position;
         hitBox = transform.GetChild(0).GetComponent<BoxCollider2D>();
-    }
 
+        sr = GetComponent<SpriteRenderer>();
+        sr.flipX = true;
+        waypointTarget = waypoint1;
+    }
+    protected override void ReceiveDamage(Damage dmg)
+    {
+        base.ReceiveDamage(dmg);
+        GameManager.instance.OnHitPointsEnenmyChange();
+    }
     protected void FixedUpdate()
     {
+        transform.position = Vector3.MoveTowards(transform.position, waypointTarget.position,speedToWaypoints * Time.fixedDeltaTime);
+        if (Vector3.Distance(transform.position, waypoint1.position) <= 0.01f)
+        {
+            waypointTarget = waypoint2;
+            sr.flipX = false;
+        }
+
+        if (Vector3.Distance(transform.position, waypoint2.position) <= 0.01f)
+        {
+            waypointTarget = waypoint1;
+            sr.flipX = true;
+        }
+
+
         this.Chasing();
+        
     }
+    //protected virtual void LateUpdate()
+    //{
+    //    transform.localScale = originScale;
+    //}
 
     protected void Chasing()
     {
@@ -76,7 +108,7 @@ public class Enemy : Mover
             hits[i] = null;
         }
     }
-
+   
     protected override void Death()
     {
         Destroy(gameObject);
