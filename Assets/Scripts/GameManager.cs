@@ -43,6 +43,7 @@ public class GameManager : MonoBehaviour
     public GameObject hud;
     public GameObject menu;
     public Animator deathMenuAnim;
+    //public Animator enemyPatrolAnim;
     //Logic
     public int gold;
     public int experience;

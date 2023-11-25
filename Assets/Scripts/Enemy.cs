@@ -25,16 +25,26 @@ public class Enemy : Mover
     public Transform waypoint1, waypoint2;
     private Transform waypointTarget;
     private SpriteRenderer sr;
+    public bool isPatrol;
+    //private Animator enemyPatrolAnim;
+    //private Animator skeletonDeathAnim;
+    
     protected override void Start()
     {
         base.Start();
+        sr = GetComponent<SpriteRenderer>();
+        isPatrol = true;
+        sr.flipX = true;
+        waypointTarget = waypoint1;
+        
+        //nemyPatrolAnim = GetComponent<Animator>();
+        //enemyPatrolAnim.SetBool("isRunning", false);
+        //skeletonDeathAnim = GetComponent<Animator>();
         playerTranform = GameManager.instance.player.transform;
         staringPosition = transform.position;
         hitBox = transform.GetChild(0).GetComponent<BoxCollider2D>();
 
-        sr = GetComponent<SpriteRenderer>();
-        sr.flipX = true;
-        waypointTarget = waypoint1;
+       
     }
     protected override void ReceiveDamage(Damage dmg)
     {
@@ -43,7 +53,15 @@ public class Enemy : Mover
     }
     protected void FixedUpdate()
     {
-        transform.position = Vector3.MoveTowards(transform.position, waypointTarget.position,speedToWaypoints * Time.fixedDeltaTime);
+        this.Patrol();
+        this.Chasing();
+        
+    }
+
+    protected virtual void Patrol()
+    {
+        transform.position = Vector3.MoveTowards(transform.position, waypointTarget.position, speedToWaypoints * Time.fixedDeltaTime);
+        isPatrol = true;
         if (Vector3.Distance(transform.position, waypoint1.position) <= 0.01f)
         {
             waypointTarget = waypoint2;
@@ -55,23 +73,17 @@ public class Enemy : Mover
             waypointTarget = waypoint1;
             sr.flipX = true;
         }
-
-
-        this.Chasing();
-        
     }
-    //protected virtual void LateUpdate()
-    //{
-    //    transform.localScale = originScale;
-    //}
-
-    protected void Chasing()
+    protected virtual void Chasing()
     {
         //Is Player in range?
         if (Vector3.Distance(playerTranform.position, staringPosition) < chaseLength)
         {
+            
             if (Vector3.Distance(playerTranform.position, staringPosition) < triggerLenght)
                 chasing = true;
+                isPatrol = false;
+                sr.flipX = true;
 
             if (chasing)
             {
@@ -91,6 +103,8 @@ public class Enemy : Mover
         {
             UpdateMotor(staringPosition - transform.position);
             chasing = false;
+            isPatrol = true;
+            sr.flipX = false;
         }
 
         //check For overlaps
@@ -111,6 +125,7 @@ public class Enemy : Mover
    
     protected override void Death()
     {
+        //skeletonDeathAnim.SetTrigger("isDead");
         Destroy(gameObject);
         GameManager.instance.GrantXp(expValue);
         GameManager.instance.ShowText("+" + expValue.ToString()+"xp", 20, Color.magenta, transform.position, Vector3.up * 40, 1.0f);
