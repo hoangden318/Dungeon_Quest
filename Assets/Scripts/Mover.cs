@@ -11,7 +11,7 @@ public abstract class Mover : Fighter
     protected Vector3 moveDelta = Vector3.zero;
     public float xSpeed = 1.0f;
     public float ySpeed = 0.8f;
-    protected virtual void Start()
+    protected override void Start()
     {
         originalSize = transform.localScale;
         boxCollider = GetComponent<BoxCollider2D>();

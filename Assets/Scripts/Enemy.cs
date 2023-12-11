@@ -26,8 +26,7 @@ public class Enemy : Mover
     private Transform waypointTarget;
     private SpriteRenderer sr;
     public bool isPatrol;
-    //private Animator enemyPatrolAnim;
-    //private Animator skeletonDeathAnim;
+    
     
     protected override void Start()
     {
@@ -37,9 +36,7 @@ public class Enemy : Mover
         sr.flipX = true;
         waypointTarget = waypoint1;
         
-        //nemyPatrolAnim = GetComponent<Animator>();
-        //enemyPatrolAnim.SetBool("isRunning", false);
-        //skeletonDeathAnim = GetComponent<Animator>();
+       
         playerTranform = GameManager.instance.player.transform;
         staringPosition = transform.position;
         hitBox = transform.GetChild(0).GetComponent<BoxCollider2D>();

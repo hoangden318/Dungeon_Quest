@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ea88b66c2be9a2429b1ab26dd736c0f, type: 3}
+  m_Name: enemyRanger
+  m_EditorClassIdentifier: 
+  nameSO: enemy_ranger
+  maxhp: 5
+  dropList:
+  - itemSO: {fileID: 11400000, guid: d31ed632ea977a141ab4f08c984bdbe0, type: 2}
+    dropRate: 80
+    maxDropRate: 0
+    minDropRate: 0

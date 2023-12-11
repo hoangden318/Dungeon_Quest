@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Fighter : MonoBehaviour
+public class Fighter : HoangBehavior
 {
     //public fields
     public int hitPoints = 10;
@@ -10,7 +10,7 @@ public class Fighter : MonoBehaviour
     public float pushRecoverySpeed = 0.2f;
 
     //Immunity
-    protected float immuneTime = 1.0f;
+    protected float immuneTime = 0.8f;
     protected float lastImmune;
 
     //push
@@ -19,7 +19,7 @@ public class Fighter : MonoBehaviour
     //All fighters can receive damage and Die
     protected virtual void ReceiveDamage(Damage dmg) 
     {
-        if(Time.time - lastImmune > immuneTime)
+        if(Time.time - lastImmune >= immuneTime)
         {
             lastImmune = Time.time;
             hitPoints -= dmg.damageAmount;

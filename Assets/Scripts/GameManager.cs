@@ -35,10 +35,12 @@ public class GameManager : MonoBehaviour
     public Player player;
     public Weapon weapon;
     public Enemy enemy;
+    public EnemyRangedAttack enemyRangedAttack;
 
     public FloatingTextManager floatingTextManager;
     public RectTransform healthBar;
     public RectTransform healthBarEnemy;
+    public RectTransform healthBarEnemyRanger;
 
     public GameObject hud;
     public GameObject menu;
@@ -130,6 +132,12 @@ public class GameManager : MonoBehaviour
 
     }
 
+    public void OnHitPointsEnenmyRangerChange()
+    {
+        float ratioBar = (float)enemyRangedAttack.hitPoints / (float)enemyRangedAttack.maxHitPoints;
+        healthBarEnemyRanger.localScale = new Vector3(ratioBar, 1, 1);
+
+    }
     public void OnSceneLoaded(Scene s, LoadSceneMode mode)
     {
         //load Spawn points player
