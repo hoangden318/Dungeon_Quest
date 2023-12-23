@@ -2,10 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class Player : Mover
 {
     private SpriteRenderer spriteRenderer;
     private bool isLive = true;
+
+
     protected override void Start()
     {
         base.Start();
@@ -34,7 +37,7 @@ public class Player : Mover
         if(isLive)
             UpdateMotor(new Vector3(x, y, 0));
     }
-
+    
     public void SwapSprites(int skinId)
     {
         spriteRenderer.sprite = GameManager.instance.playerSprites[skinId];

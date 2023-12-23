@@ -11,17 +11,25 @@ public abstract class Mover : Fighter
     protected Vector3 moveDelta = Vector3.zero;
     public float xSpeed = 1.0f;
     public float ySpeed = 0.8f;
+
+    public float doubleTapTime = 0.19f;
+    private float lastTapTime;
+    private Vector3 targetPos;
+   
     protected override void Start()
     {
         originalSize = transform.localScale;
         boxCollider = GetComponent<BoxCollider2D>();
     }
-
+    protected virtual void Update()
+    {
+        this.DoubleTap();
+    }
     protected virtual void UpdateMotor(Vector3 input)
     {
         //reset moveDelta
         this.moveDelta = new Vector3(input.x * xSpeed, input.y * ySpeed, 0);
-
+        //this.DoubleTap();
         //swap sprite direction
         if (moveDelta.x > 0)
             transform.localScale = originalSize;
@@ -50,5 +58,34 @@ public abstract class Mover : Fighter
             //movement player
             transform.Translate(this.moveDelta.x * Time.deltaTime, 0, 0);
         }
+
+       
+    }
+
+    public void DoubleTap()
+    {
+        if (Input.GetKeyDown(KeyCode.D))
+        {
+            if (Time.time - lastTapTime < doubleTapTime)
+            {
+                targetPos = new Vector3(0.3f * xSpeed , transform.position.y * ySpeed, 0);
+                transform.position = new Vector3((transform.position.x + targetPos.x), transform.position.y,0f);
+                
+            }
+            lastTapTime = Time.time;
+        }
+
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            if (Time.time - lastTapTime < doubleTapTime)
+            {
+                targetPos = new Vector3(-0.3f * xSpeed , transform.position.y * ySpeed, 0);
+                transform.position = new Vector3((transform.position.x + targetPos.x), transform.position.y, 0f);
+                
+            }
+            lastTapTime = Time.time;
+        }
+
+       
     }
 }

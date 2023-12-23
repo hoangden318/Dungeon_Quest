@@ -1,9 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEditor.PlayerSettings;
 
 public class Enemy : Mover
 {
+    public Enemy enemy;
     //Experience
     public int expValue = 1;
     //public Vector3 originScale;
@@ -21,20 +23,23 @@ public class Enemy : Mover
     private Collider2D[] hits = new Collider2D[10];
 
     //Patrol to WayPoints
-    public float speedToWaypoints;
-    public Transform waypoint1, waypoint2;
-    private Transform waypointTarget;
+    //public float speedToWaypoints;
+    //public Transform waypoint1, waypoint2;
+    //private Transform waypointTarget;
     private SpriteRenderer sr;
-    public bool isPatrol;
-    
-    
+    //public bool isPatrol;
+
+    //heal bar
+    public RectTransform healthBarEnemy;
+
+    public EnemySO enemySO;
     protected override void Start()
     {
         base.Start();
         sr = GetComponent<SpriteRenderer>();
-        isPatrol = true;
+        //isPatrol = true;
         sr.flipX = true;
-        waypointTarget = waypoint1;
+        //waypointTarget = waypoint1;
         
        
         playerTranform = GameManager.instance.player.transform;
@@ -43,34 +48,41 @@ public class Enemy : Mover
 
        
     }
+    
     protected override void ReceiveDamage(Damage dmg)
     {
         base.ReceiveDamage(dmg);
-        GameManager.instance.OnHitPointsEnenmyChange();
+        OnHitPointsEnenmyChange();
+    }
+    public void OnHitPointsEnenmyChange()
+    {
+        float ratioBar = enemy.hitPoints / enemy.maxHitPoints;
+        healthBarEnemy.localScale = new Vector3(ratioBar, 1, 1);
+
     }
     protected void FixedUpdate()
     {
-        this.Patrol();
+        //this.Patrol();
         this.Chasing();
         
     }
 
-    protected virtual void Patrol()
-    {
-        transform.position = Vector3.MoveTowards(transform.position, waypointTarget.position, speedToWaypoints * Time.fixedDeltaTime);
-        isPatrol = true;
-        if (Vector3.Distance(transform.position, waypoint1.position) <= 0.01f)
-        {
-            waypointTarget = waypoint2;
-            sr.flipX = false;
-        }
+    //protected virtual void Patrol()
+    //{
+    //    transform.position = Vector3.MoveTowards(transform.position, waypointTarget.position, speedToWaypoints * Time.fixedDeltaTime);
+    //    isPatrol = true;
+    //    if (Vector3.Distance(transform.position, waypoint1.position) <= 0.01f)
+    //    {
+    //        waypointTarget = waypoint2;
+    //        sr.flipX = false;
+    //    }
 
-        if (Vector3.Distance(transform.position, waypoint2.position) <= 0.01f)
-        {
-            waypointTarget = waypoint1;
-            sr.flipX = true;
-        }
-    }
+    //    if (Vector3.Distance(transform.position, waypoint2.position) <= 0.01f)
+    //    {
+    //        waypointTarget = waypoint1;
+    //        sr.flipX = true;
+    //    }
+    //}
     protected virtual void Chasing()
     {
         //Is Player in range?
@@ -79,7 +91,7 @@ public class Enemy : Mover
             
             if (Vector3.Distance(playerTranform.position, staringPosition) < triggerLenght)
                 chasing = true;
-                isPatrol = false;
+                //isPatrol = false;
                 sr.flipX = true;
 
             if (chasing)
@@ -100,7 +112,7 @@ public class Enemy : Mover
         {
             UpdateMotor(staringPosition - transform.position);
             chasing = false;
-            isPatrol = true;
+            //isPatrol = true;
             sr.flipX = false;
         }
 
@@ -122,10 +134,12 @@ public class Enemy : Mover
    
     protected override void Death()
     {
-        //skeletonDeathAnim.SetTrigger("isDead");
+       
+        Vector3 pos = transform.position;
+        Quaternion rot = Quaternion.identity;
         Destroy(gameObject);
         GameManager.instance.GrantXp(expValue);
         GameManager.instance.ShowText("+" + expValue.ToString()+"xp", 20, Color.magenta, transform.position, Vector3.up * 40, 1.0f);
-
+        ItemDropSpawner.Instance.Drop(enemy.enemySO.dropList, pos, rot);
     }
 }

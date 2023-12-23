@@ -36,7 +36,8 @@ public class Weapon : Collidable
             if(Time.time - lastSwing > cooldown)
             {
                 lastSwing = Time.time;
-                this.Swing();
+                //this.Swing();
+                this.Swing1();
             }
         }
     }
@@ -62,7 +63,14 @@ public class Weapon : Collidable
     {
         anim.SetTrigger("Swing");
     }
-
+    private void Swing1()
+    {
+        anim.SetTrigger("Swing1");
+    } 
+    public void whiteSlash()
+    {
+        anim.Play("slash");
+    }
     public void UpgradeWeapon()
     {
         weaponLevel++;

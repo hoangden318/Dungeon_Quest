@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class EnemyRangedAttack : Mover
 {
+
     public int expValue = 2;
 
     public Transform wayPoint1, wayPoint2;
@@ -18,8 +19,11 @@ public class EnemyRangedAttack : Mover
     private SpriteRenderer sp;
     private Transform target;
 
-    protected EnemyRangedAttack rangedAttack;
+    public EnemyRangedAttack rangedAttack;
     public EnemySO enemySO;
+
+    //heal bar
+    public RectTransform healthBarEnemyRanger;
     protected override void Start()
     {
         base.Start();
@@ -31,13 +35,19 @@ public class EnemyRangedAttack : Mover
         rangedAttack = GetComponent<EnemyRangedAttack>();
        
     }
-
+    
     protected override void ReceiveDamage(Damage dmg)
     {
         base.ReceiveDamage(dmg);
-        GameManager.instance.OnHitPointsEnenmyRangerChange();
+        OnHitPointsEnenmyRangerChange();
     }
-    protected virtual void Update()
+    public void OnHitPointsEnenmyRangerChange()
+    {
+        float ratioBar = rangedAttack.hitPoints / rangedAttack.maxHitPoints;
+        healthBarEnemyRanger.localScale = new Vector3(ratioBar, 1, 1);
+
+    }
+    protected override void Update()
     {
         if(Vector3.Distance(transform.position, target.position) > attackRange)
         {
@@ -81,9 +91,12 @@ public class EnemyRangedAttack : Mover
 
     protected override void Death()
     {
+        Vector3 pos = transform.position;
+        Quaternion rot = Quaternion.identity;
         Destroy(gameObject);
         GameManager.instance.GrantXp(expValue);
         GameManager.instance.ShowText("+" + expValue.ToString() + "xp", 20, Color.magenta, transform.position, Vector3.up * 40, 1.0f);
-        DropManager.instance.Drop(rangedAttack.enemySO.dropList);
+        //DropManager.instance.Drop(rangedAttack.enemySO.dropList);
+        ItemDropSpawner.Instance.Drop(rangedAttack.enemySO.dropList, pos, rot);
     }
 }
