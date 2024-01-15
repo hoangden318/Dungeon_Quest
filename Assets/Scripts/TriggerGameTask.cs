@@ -30,6 +30,13 @@ public class TriggerGameTask : HoangBehavior
         yield return new WaitForSeconds(3.9f);
         convers.GetComponent<Text>().text = "Còn cái hồ bên trái để hồi lại máu đã mất";
         yield return new WaitForSeconds(3.5f);
+
+        convers.GetComponent<Text>().text = "Ấn vào rương (chest) để xem vũ khí và thông tin";
+        yield return new WaitForSeconds(3.5f);
+
+        convers.GetComponent<Text>().text = "Nhấn ESC để mở cài đặt (Option)!!";
+        yield return new WaitForSeconds(3.5f);
+
         convers.GetComponent<Text>().text = "Chúc cậu may mắn!!";
         yield return new WaitForSeconds(3.0f);
         convers.GetComponent<Text>().text = "";

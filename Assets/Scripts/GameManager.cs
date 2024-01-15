@@ -144,7 +144,7 @@ public class GameManager : MonoBehaviour
             }
             else
             {
-                Debug.LogError("SpawnPoint not found on the scene!");
+                return;
             }
             //player.transform.position = GameObject.Find("SpawnPoints").transform.position;
 
