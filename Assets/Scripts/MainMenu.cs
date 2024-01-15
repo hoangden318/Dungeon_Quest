@@ -20,7 +20,8 @@ public class MainMenu : HoangBehavior
 
     public void QuitMainMenu()
     {
-        SceneManager.LoadScene(0);
+       
+        SceneManager.LoadScene("MainMenu");
     }
     
     

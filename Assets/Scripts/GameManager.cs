@@ -19,12 +19,19 @@ public class GameManager : MonoBehaviour
             return;
         }
         instance = this;
+       
+       
+
+    }
+    private void OnEnable()
+    {
         SceneManager.sceneLoaded += LoadState;
         SceneManager.sceneLoaded += OnSceneLoaded;
-        
-        
     }
-    
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
     //Resources
     public List<Sprite> playerSprites;
     public List<Sprite> weaponSprites;
@@ -34,18 +41,16 @@ public class GameManager : MonoBehaviour
     //Reference
     public Player player;
     public Weapon weapon;
-    //public Enemy enemy;
-    //public EnemyRangedAttack enemyRangedAttack;
 
     public FloatingTextManager floatingTextManager;
     public RectTransform healthBar;
-    //public RectTransform healthBarEnemy;
-    //public RectTransform healthBarEnemyRanger;
+   
 
     public GameObject hud;
     public GameObject menu;
     public Animator deathMenuAnim;
-    //public Animator enemyPatrolAnim;
+    //public Animator winMenuAnim;
+    
     //Logic
     public int gold;
     public int experience;
@@ -125,30 +130,31 @@ public class GameManager : MonoBehaviour
         float ratioHeal = (float)player.hitPoints / (float)player.maxHitPoints;
         healthBar.localScale = new Vector3(ratioHeal, 1, 1);
     }
-    //public void OnHitPointsEnenmyChange()
-    //{
-    //    float ratioBar = (float)enemy.hitPoints / (float)enemy.maxHitPoints;
-    //    healthBarEnemy.localScale = new Vector3(ratioBar, 1, 1);
-
-    //}
-
-    //public void OnHitPointsEnenmyRangerChange()
-    //{
-    //    float ratioBar = (float)enemyRangedAttack.hitPoints / (float)enemyRangedAttack.maxHitPoints;
-    //    healthBarEnemyRanger.localScale = new Vector3(ratioBar, 1, 1);
-
-    //}
+    
     public void OnSceneLoaded(Scene s, LoadSceneMode mode)
     {
+        //SceneManager.sceneLoaded -= OnSceneLoaded;
         //load Spawn points player
-        if(player != null)
+        if (player != null)
         {
-            player.transform.position = GameObject.Find("SpawnPoints").transform.position;
-        }
+            GameObject spawnPoint = GameObject.Find("SpawnPoints");
+            if (spawnPoint != null )
+            {
+                player.transform.position = spawnPoint.transform.position;
+            }
+            else
+            {
+                Debug.LogError("SpawnPoint not found on the scene!");
+            }
+            //player.transform.position = GameObject.Find("SpawnPoints").transform.position;
 
-        //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
+       
+       
 
     }
+
+    
     //Respawn player
     public void Respawn()
     {
@@ -156,15 +162,17 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene("Main");
         player.Respawn();
     }
+
+   
     public void SaveState()
     {
-        string s = " ";
-        s += "0" + "|";
-        s += gold.ToString() + "|";
-        s += experience.ToString() + "|";
-        s += weapon.weaponLevel.ToString();
+        //string s = " ";
+        //s += "0" + "|";
+        //s += gold.ToString() + "|";
+        //s += experience.ToString() + "|";
+        //s += weapon.weaponLevel.ToString();
 
-        PlayerPrefs.SetString("SaveState",s);
+        //PlayerPrefs.SetString("SaveState",s);
        
     }
 
@@ -182,13 +190,13 @@ public class GameManager : MonoBehaviour
 
         //change player exp
         experience = int.Parse(data[2]);
-        if(this.GetCurentLevel() != 1)
+        if (this.GetCurentLevel() != 1)
             player.SetLevel(GetCurentLevel());
 
         //change player weaponLevel
         weapon.SetWeaponLevel(int.Parse(data[3]));
 
-       
-        
+
+
     }
 }

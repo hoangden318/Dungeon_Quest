@@ -31,13 +31,14 @@ public class Weapon : Collidable
     protected override void Update()
     {
         base.Update();
-        if(Input.GetKeyDown(KeyCode.Space))
+        if(Input.GetKeyDown(KeyCode.Space) && GameManager.instance.player.hitPoints > 0)
         {
             if(Time.time - lastSwing > cooldown)
             {
                 lastSwing = Time.time;
                 //this.Swing();
                 this.Swing1();
+                SoundManager.Instance.PlaySfx("Hit");
             }
         }
     }
@@ -66,17 +67,15 @@ public class Weapon : Collidable
     private void Swing1()
     {
         anim.SetTrigger("Swing1");
-    } 
-    public void whiteSlash()
-    {
-        anim.Play("slash");
     }
+
     public void UpgradeWeapon()
     {
-        weaponLevel++;
         spriteRenderer.sprite = GameManager.instance.weaponSprites[weaponLevel];
+        weaponLevel++;
+
     }
-    
+
     public void SetWeaponLevel(int level)
     {
         weaponLevel = level;

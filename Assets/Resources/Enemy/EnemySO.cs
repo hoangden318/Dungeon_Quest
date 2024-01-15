@@ -42,7 +42,7 @@ public class EnemySO : ScriptableObject
         foreach (var dropRate in dropList)
         {
             float percentage = (float)dropRate.dropRate / totalDropRate * enemyDropPercentage;
-            Debug.Log(dropRate.itemSO.name + ": "+ percentage.ToString("F2") + "%");
+            //Debug.Log(dropRate.itemSO.name + ": "+ percentage.ToString("F2") + "%");
         }
     } 
     

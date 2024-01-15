@@ -43,11 +43,11 @@ public class EnemyRangedAttack : Mover
     }
     public void OnHitPointsEnenmyRangerChange()
     {
-        float ratioBar = rangedAttack.hitPoints / rangedAttack.maxHitPoints;
+        float ratioBar = (float)rangedAttack.hitPoints / (float)rangedAttack.maxHitPoints;
         healthBarEnemyRanger.localScale = new Vector3(ratioBar, 1, 1);
 
     }
-    protected override void Update()
+    protected void Update()
     {
         if(Vector3.Distance(transform.position, target.position) > attackRange)
         {

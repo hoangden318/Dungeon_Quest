@@ -1272,7 +1272,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: weapon_1
+      name: weapon_2
       rect:
         serializedVersion: 2
         x: 163
@@ -1293,7 +1293,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: weapon_2
+      name: weapon_1
       rect:
         serializedVersion: 2
         x: 179
@@ -1314,7 +1314,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: weapon_3
+      name: weapon_1.1
       rect:
         serializedVersion: 2
         x: 195
@@ -1335,7 +1335,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: weapon_4
+      name: weapon_3
       rect:
         serializedVersion: 2
         x: 228
@@ -1377,7 +1377,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: weapon_6
+      name: weapon_7
       rect:
         serializedVersion: 2
         x: 163
@@ -2645,7 +2645,7 @@ TextureImporter:
         width: 22
         height: 20
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -2666,7 +2666,7 @@ TextureImporter:
         width: 32
         height: 19
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -2687,7 +2687,7 @@ TextureImporter:
         width: 5
         height: 33
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -2708,7 +2708,7 @@ TextureImporter:
         width: 5
         height: 33
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -2716,6 +2716,48 @@ TextureImporter:
       bones: []
       spriteID: fac6e6e9850f5a447bfb4050cb343bac
       internalID: -1361029996
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: weapon_4
+      rect:
+        serializedVersion: 2
+        x: 179
+        y: 193
+        width: 10
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5fc856f7721402e49a21444ee019e151
+      internalID: -1149589883
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: weapon_6
+      rect:
+        serializedVersion: 2
+        x: 115
+        y: 161
+        width: 10
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 76953ecda8fa393438d738efe2c619ce
+      internalID: 1884574280
       vertices: []
       indices: 
       edges: []
@@ -2736,9 +2778,9 @@ TextureImporter:
       pillar_1: -214837440
       chest_0: 1589288020
       stairs_0: 52254344
-      weapon_2: 789866970
-      torch_0: -537847819
       short_Sword: 772170933
+      torch_0: -537847819
+      weapon_2: -762208629
       enemy_WarriorOrc: -1069520080
       enemy_pupa: -88197032
       wall_3: -1524554370
@@ -2746,7 +2788,7 @@ TextureImporter:
       torch_6: 343021911
       crate_2: -499170168
       enemy_skull: 409084933
-      weapon_3: -793267920
+      weapon_3: 967805530
       enemy_smallWater: 809646674
       healingFoundTain_2: -1682701609
       floor_2: -1206961628
@@ -2763,14 +2805,15 @@ TextureImporter:
       floor_0: -886460419
       weapon_0: 174086395
       pillar_4: -1233874984
-      weapon_1: -762208629
       toxic_fountain1: -2042628594
       door_close: 733047335
+      enemy_wood: 928975583
       enemy_mask: -14269166
       enemy_devil: -1689202520
-      enemy_wood: 928975583
+      weapon_1: 789866970
       sewer_3: -1813422829
       toxic_fountain0: 1148461310
+      weapon_1.1: -793267920
       torch_7: 158707279
       buyer: -243563109
       enemy_knight: -525220137
@@ -2793,10 +2836,10 @@ TextureImporter:
       enemy_smile: 157873781
       crate_1: 508090855
       redFlag: -2025394609
-      wall_verticalLeft: -483355780
+      skull_1: -1863789656
       enemy_smallPupa: -1112249891
       enemy_pig: -897651654
-      skull_1: -1863789656
+      wall_verticalLeft: -483355780
       stairs_1: 1865605055
       water_fountain0: -605412641
       floor_7: -671120738
@@ -2811,6 +2854,7 @@ TextureImporter:
       Player_1: -2039526260
       enemy_hellKnight: 909884994
       wall_5: 22833828
+      weapon_7: 1506247598
       boss_2: 1503523798
       torch_3: 2086757993
       crate_3: -2041196673
@@ -2843,13 +2887,13 @@ TextureImporter:
       floor_1: -1604077112
       wall_4: -695981206
       smallHealJar: -323687850
-      weapon_4: 967805530
       enemy_smallHell: -461851177
+      weapon_4: -1149589883
       enemy_thinOrange: 1854530382
       wall_dung1: 1318022333
       pillar_0: -1632172567
       enemy_Orc: -578657217
-      weapon_6: 1506247598
+      weapon_6: 1884574280
       sewer_1: -1202200403
       blueFlag: 1194019865
       yellowFlag: 1239863837

@@ -16,4 +16,9 @@ public class Collectable : Collidable
     {
         Collected = true;
     }
+
+    protected virtual void OnNoCollect()
+    {
+        Collected = false;
+    }
 }

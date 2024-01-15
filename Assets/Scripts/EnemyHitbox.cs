@@ -6,7 +6,7 @@ public class EnemyHitbox : Collidable
 {
     //damage
     public int damage = 1;
-    public float pushForce = 3;
+    public float pushForce = 3f;
 
     protected override void OnCollide(Collider2D coll)
     {

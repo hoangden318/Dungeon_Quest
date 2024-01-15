@@ -9,22 +9,23 @@ public abstract class Mover : Fighter
     protected BoxCollider2D boxCollider;
     protected RaycastHit2D hit;
     protected Vector3 moveDelta = Vector3.zero;
+    public Vector3 MoveDelta => moveDelta;
     public float xSpeed = 1.0f;
     public float ySpeed = 0.8f;
 
-    public float doubleTapTime = 0.19f;
-    private float lastTapTime;
-    private Vector3 targetPos;
+    //public float doubleTapTime = 0.19f;
+    //private float lastTapTime;
+    //private Vector3 targetPos;
    
     protected override void Start()
     {
         originalSize = transform.localScale;
         boxCollider = GetComponent<BoxCollider2D>();
     }
-    protected virtual void Update()
-    {
-        this.DoubleTap();
-    }
+    //protected virtual void Update()
+    //{
+    //    this.DoubleTap();
+    //}
     protected virtual void UpdateMotor(Vector3 input)
     {
         //reset moveDelta
@@ -62,30 +63,30 @@ public abstract class Mover : Fighter
        
     }
 
-    public void DoubleTap()
-    {
-        if (Input.GetKeyDown(KeyCode.D))
-        {
-            if (Time.time - lastTapTime < doubleTapTime)
-            {
-                targetPos = new Vector3(0.3f * xSpeed , transform.position.y * ySpeed, 0);
-                transform.position = new Vector3((transform.position.x + targetPos.x), transform.position.y,0f);
-                
-            }
-            lastTapTime = Time.time;
-        }
+    //public void DoubleTap()
+    //{
+    //    if (Input.GetKeyDown(KeyCode.D))
+    //    {
+    //        if (Time.time - lastTapTime < doubleTapTime)
+    //        {
+    //            targetPos = new Vector3(0.3f * xSpeed , transform.position.y * ySpeed, 0);
+    //            transform.position = new Vector3((transform.position.x + targetPos.x), transform.position.y,0f);
+               
+    //        }
+    //        lastTapTime = Time.time;
+    //    }
 
-        if (Input.GetKeyDown(KeyCode.A))
-        {
-            if (Time.time - lastTapTime < doubleTapTime)
-            {
-                targetPos = new Vector3(-0.3f * xSpeed , transform.position.y * ySpeed, 0);
-                transform.position = new Vector3((transform.position.x + targetPos.x), transform.position.y, 0f);
-                
-            }
-            lastTapTime = Time.time;
-        }
+    //    if (Input.GetKeyDown(KeyCode.A))
+    //    {
+    //        if (Time.time - lastTapTime < doubleTapTime)
+    //        {
+    //            targetPos = new Vector3(-0.3f * xSpeed , transform.position.y * ySpeed, 0);
+    //            transform.position = new Vector3((transform.position.x + targetPos.x), transform.position.y, 0f);
+               
+    //        }
+    //        lastTapTime = Time.time;
+    //    }
 
        
-    }
+    //}
 }

@@ -5,64 +5,33 @@ using UnityEngine;
 
 public class LockedArea : Collidable
 {
-    [Header("Boss")]
-    //public Boss boss;
+    [Header("Area Enemy")]
 
     public GameObject[] spikes;
     public List<Transform> enemies = new List<Transform>();
     public int enemyCount = 0;
 
-    //int count = 0;
+    //private bool isPlayingSound;
+    public string triggerZoneName;
     protected override void Start()
     {
         base.Start();
-        
-        
-        for (int i = 0; i < spikes.Length; i++)
-        {
-            spikes[i].SetActive(false);
-        }
+        DeactiveSpikes();
     }
     protected override void Update()
     {
         base.Update();
-        //for (int i = 0; i < enemies.Count; i++)
-        //{
-        //    if (enemies.Count>= 1  && enemies[i].activeSelf == true)
-        //    {
-        //        enemyCount += 1 ;
-        //    }
-        //    else
-        //    {
-        //        enemyCount--;
-        //    }
-        //}
-        //boss.GetComponentInChildren<Boss>();
-        foreach (Transform enemy in enemies)
+        
+       enemies.RemoveAll(enemy => enemy == null);
+
+        enemyCount = enemies.Count;
+
+        if (enemyCount == 0)
         {
-
-            if (enemy == null)
-            {
-                for (int i = 0; i < spikes.Length; i++)
-                {
-                    spikes[i].SetActive(false);
-                }
-                
-            }
-
-            //boss.bulletCircle.gameObject.SetActive(true);
+            DeactiveSpikes();
+            StartCoroutine(StopSound());
         }
 
-        
-       if(enemies.Count == 0)
-        {
-            for (int i = 0; i < spikes.Length; i++)
-            {
-                spikes[i].SetActive(false);
-            }
-        }
-        
-        
     }
 
     protected override void OnCollide(Collider2D coll)
@@ -70,16 +39,62 @@ public class LockedArea : Collidable
 
         if (coll.gameObject.name == "Player" )
         {
-            //boss.bulletCircle.gameObject.SetActive(true);
-            for (int i = 0; i < spikes.Length; i++)
-            {
-                spikes[i].SetActive(true);
-            }
-
+            ActiveSpikes();
         }
-
-        
     }
 
-    
+    //private void OnTriggerEnter2D(Collider2D other)
+    //{
+    //    if(other.gameObject.name == "Player")
+    //        StartCoroutine(PlaySound());
+    //}
+    //IEnumerator PlaySound()
+    //{
+    //    if(isPlayingSound == false)
+    //    {
+    //        isPlayingSound = true;
+    //        yield return new WaitForSeconds(0.1f);
+    //        SoundManager.Instance.PlayMusic("EnemyArea");
+    //    }
+        
+    //}
+
+    IEnumerator StopSound()
+    {
+        //isPlayingSound = false;
+        yield return new WaitForSeconds(0.1f);
+        SoundManager.Instance.StopMusic("EnemyArea",triggerZoneName);
+    }
+    void DeactiveSpikes()
+    {
+        foreach(GameObject spike in spikes)
+        {
+            spike.SetActive(false);
+        }
+    }
+
+    void ActiveSpikes()
+    {
+        foreach (GameObject spike in spikes)
+        {
+            spike.SetActive(true);
+        }
+    }
+
+    //public void AddEnemy(Transform enemy)
+    //{
+    //    enemies.Add(enemy);
+    //    enemyCount = enemies.Count;
+    //}
+
+    //public void RemoveEnemy(Transform enemy)
+    //{
+    //    enemies.Remove(enemy);
+    //    enemyCount = enemies.Count;
+
+    //    if(enemyCount == 0)
+    //    {
+    //        DeactiveSpikes();
+    //    }
+    //}
 }

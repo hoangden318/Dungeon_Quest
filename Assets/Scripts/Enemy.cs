@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEditor.PlayerSettings;
+
 
 public class Enemy : Mover
 {
@@ -56,7 +56,7 @@ public class Enemy : Mover
     }
     public void OnHitPointsEnenmyChange()
     {
-        float ratioBar = enemy.hitPoints / enemy.maxHitPoints;
+        float ratioBar = (float)enemy.hitPoints / (float)enemy.maxHitPoints;
         healthBarEnemy.localScale = new Vector3(ratioBar, 1, 1);
 
     }

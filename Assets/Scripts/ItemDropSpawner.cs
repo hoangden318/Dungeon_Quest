@@ -9,8 +9,15 @@ public class ItemDropSpawner : Spawner
     protected override void Awake()
     {
         base.Awake();
-        if (ItemDropSpawner.Instance != null) Debug.LogWarning("exsist 1 ItemDropSpawn");
-        Instance = this;
+        if (ItemDropSpawner.Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+            return;
+        }
     }
 
     public virtual void Drop(List<DropRate> dropList, Vector3 pos, Quaternion rot)
@@ -23,12 +30,12 @@ public class ItemDropSpawner : Spawner
         }
 
         int randomValue = Random.Range(0, totalDropRate);
-        Debug.Log(randomValue);
+        //Debug.Log(randomValue);
         int activeDroprate = 0;
         foreach(DropRate dropRate in dropList)
         {
             activeDroprate += dropRate.dropRate;
-            Debug.Log(activeDroprate);
+            //Debug.Log(activeDroprate);
             if(randomValue < activeDroprate)
             {
                 string itemCode = dropRate.itemSO.itemName;

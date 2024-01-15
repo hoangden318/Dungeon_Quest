@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class Player : Mover
 {
+    public Projectile projectile;
     private SpriteRenderer spriteRenderer;
     private bool isLive = true;
 
@@ -27,17 +28,23 @@ public class Player : Mover
     protected override void Death()
     {
         isLive = false;
+        SoundManager.Instance.StopAllSound();
         GameManager.instance.deathMenuAnim.SetTrigger("show");
     }
-    protected void FixedUpdate()
+    public void FixedUpdate()
     {
+        
         //this.MoveMent();
         float x = Input.GetAxisRaw("Horizontal");
         float y = Input.GetAxisRaw("Vertical");
         if(isLive)
             UpdateMotor(new Vector3(x, y, 0));
+        UpdateLastPlayerPos(new Vector3(x,y,0));
     }
-    
+    public void UpdateLastPlayerPos(Vector3 newPos)
+    {
+        projectile.lastPosPlayer = newPos;
+    }
     public void SwapSprites(int skinId)
     {
         spriteRenderer.sprite = GameManager.instance.playerSprites[skinId];

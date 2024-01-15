@@ -13,6 +13,10 @@ public class CharacterMenu : MonoBehaviour
     public Image weaponSprites;
     public RectTransform xpBar;
 
+    //protected void Start()
+    //{
+    //    //weaponSprites.sprite = GameManager.instance.weaponSprites[GameManager.instance.weapon.weaponLevel];
+    //}
     //character selection
     public void OnArrowClick(bool right)
     {
