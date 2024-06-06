@@ -15,8 +15,5 @@ MonoBehaviour:
   abilityName: Dash
   cooldownTime: 3
   activeTime: 0.5
-  dashDistance: 0.4
-  minDistanceToWall: 0.1
-  wallLayer:
-    serializedVersion: 2
-    m_Bits: 64
+  rb: {fileID: 0}
+  player: {fileID: 0}
