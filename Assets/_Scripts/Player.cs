@@ -8,14 +8,13 @@ public class Player : Mover
     [SerializeField] protected Projectile projectile;
     private SpriteRenderer spriteRenderer;
     public bool isLive = true;
-
+    public bool canMove = true;
 
     protected override void Start()
     {
         base.Start();
         spriteRenderer = GetComponent<SpriteRenderer>();
 
-       
     }
     protected override void ReceiveDamage(Damage dmg)
     {
@@ -33,14 +32,16 @@ public class Player : Mover
     }
     public void FixedUpdate()
     {
-        
-        //this.MoveMent();
         float x = Input.GetAxisRaw("Horizontal");
         float y = Input.GetAxisRaw("Vertical");
-        if(isLive)
+        if(isLive && canMove)
             UpdateMotor(new Vector3(x, y, 0));
         UpdateLastPlayerPos(new Vector3(x,y,0));
     }
+    public void SetCanMove(bool value)
+    {
+        canMove = value;
+    }    
     public void UpdateLastPlayerPos(Vector3 newPos)
     {
         projectile.lastPosPlayer = newPos;
@@ -52,6 +53,7 @@ public class Player : Mover
 
     public void OnLevelUp()
     {
+        GameManager.instance.ShowText("level up", 22, Color.white, transform.position, Vector3.up * 40, 1.0f);
         maxHitPoints++;
         hitPoints = maxHitPoints;
     }

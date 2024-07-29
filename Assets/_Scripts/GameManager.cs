@@ -19,8 +19,6 @@ public class GameManager : MonoBehaviour
             return;
         }
         instance = this;
-       
-       
 
     }
     private void OnEnable()
@@ -121,7 +119,7 @@ public class GameManager : MonoBehaviour
     }
     public void OnLevelUp()
     {
-        Debug.Log("Level up!");
+        //Debug.Log("Level up!");
         player.OnLevelUp();
         this.OnHitPointChange();
     }    
@@ -133,8 +131,7 @@ public class GameManager : MonoBehaviour
     
     public void OnSceneLoaded(Scene s, LoadSceneMode mode)
     {
-        //SceneManager.sceneLoaded -= OnSceneLoaded;
-        //load Spawn points player
+
         if (player != null)
         {
             GameObject spawnPoint = GameObject.Find("SpawnPoints");
@@ -146,12 +143,9 @@ public class GameManager : MonoBehaviour
             {
                 return;
             }
-            //player.transform.position = GameObject.Find("SpawnPoints").transform.position;
 
         }
-       
-       
-
+ 
     }
 
     
@@ -195,8 +189,6 @@ public class GameManager : MonoBehaviour
 
         //change player weaponLevel
         weapon.SetWeaponLevel(int.Parse(data[3]));
-
-
 
     }
 }

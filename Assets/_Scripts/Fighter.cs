@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Fighter : HoangBehavior
+public abstract class Fighter : HoangBehavior
 {
     //public fields
     public int hitPoints = 10;
@@ -34,8 +34,5 @@ public class Fighter : HoangBehavior
         }
     }
 
-    protected virtual void Death()
-    {
-
-    }
+    protected abstract void Death();
 }

@@ -25,11 +25,11 @@ public class BulletCircle : BaseProjectile
         if (!canCreateBullet)
             CancelInvoke("Shoot");
     }
-    protected override void OnCollisionEnter2D(Collision2D collision)
-    {
-        base.OnCollisionEnter2D(collision);
-        Debug.Log("va cham vs" + gameObject.name);
-    }
+    //protected override void OnCollisionEnter2D(Collision2D collision)
+    //{
+    //    base.OnCollisionEnter2D(collision);
+    //    Debug.Log("va cham vs" + gameObject.name);
+    //}
     protected override void OnTriggerEnter2D(Collider2D other)
     {
         base.OnTriggerEnter2D(other);
@@ -56,14 +56,7 @@ public class BulletCircle : BaseProjectile
             curentAngle += angleStep;
 
 
-            //float angleStep = speardAngle / numberOfBullets;
-            //float angle = -speardAngle / 2f;
-
-            //float bulletDirX = transform.position.x + Mathf.Sin(Mathf.Deg2Rad * angle);
-            //float bulletDirY = transform.position.y + Mathf.Cos(Mathf.Deg2Rad * angle);
-
-            //Vector2 bulletDirection = new Vector2(bulletDirX, bulletDirY);
-            //Vector2 bulletDirectionNomalized = (bulletDirection - (Vector2)transform.position).normalized;
+            
         }
     }
 }

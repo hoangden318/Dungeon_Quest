@@ -17,36 +17,5 @@ public class Portal : Collidable
         }
     }
 
-    //public string SceneName;
-    //public string loadingSceneName = "SceneLoad";
-
-
-    //protected override void OnCollide(Collider2D coll)
-    //{
-    //    if (coll.name == "Player")
-    //    {
-    //        GameManager.instance.SaveState();
-    //        StartCoroutine(LoadingScene());
-
-    //    }
-    //}
-    //IEnumerator LoadingScene()
-    //{
-    //    //SceneManager.LoadScene(loadingSceneName);
-
-    //    //yield return new WaitForSeconds(2f);
-
-    //    //AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(SceneName);
-    //    //while (!asyncLoad.isDone)
-    //    //{
-    //    //    yield return null;
-    //    //}
-
-    //    //SceneManager.LoadScene(SceneName);
-
-    //    AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(loadingSceneName);
-
-    //    yield return new WaitForSeconds(1f);
-    //    SceneManager.LoadScene(SceneName);
-    //}
+    
 }

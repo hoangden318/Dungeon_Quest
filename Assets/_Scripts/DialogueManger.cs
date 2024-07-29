@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,12 +9,13 @@ public class DialogueManger : MonoBehaviour
     protected static DialogueManger instance;
     public static DialogueManger Instance => instance;
 
+    public event Action OnDialogueEnd;
     private Queue<string> sentences;
 
     public Text nameText;
     public Text dialogueText;
     public Animator anim;
-    //public Canvas abilityCanvas;
+    
 
     private void Awake()
     {
@@ -29,11 +31,12 @@ public class DialogueManger : MonoBehaviour
     void Start()
     {
         sentences = new Queue<string>();
-        //abilityCanvas.gameObject.SetActive(false);
+        
     }
 
     public void StartDialogueGuide(Dialogue dialogue)
     {
+        
         anim.SetBool("IsOpen", true);
         nameText.text = dialogue.name;
         sentences.Clear();
@@ -68,8 +71,9 @@ public class DialogueManger : MonoBehaviour
     }
     public void EndDialogue()
     {
+        
         anim.SetBool("IsOpen", false);
         AbilitySystem.Instance.SetActive();
-        //abilityCanvas.gameObject.SetActive(true);
+        OnDialogueEnd?.Invoke();
     }
 }

@@ -38254,7 +38254,7 @@ MonoBehaviour:
   wayPoint2: {fileID: 284267860}
   moveSpeed: 0.25
   attackRange: 0.4
-  projectile: {fileID: 5170068606481928371, guid: b71168de2a0c4ab4db1e9ab4259921d7, type: 3}
+  projectile: {fileID: 5170068606481928374, guid: b71168de2a0c4ab4db1e9ab4259921d7, type: 3}
   firePoint: {fileID: 385779493}
   rangedAttack: {fileID: 1034505674}
   enemySO: {fileID: 11400000, guid: 7fdacc359bdd9d04c9bc5da9ad26eb5e, type: 2}

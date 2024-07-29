@@ -41,7 +41,7 @@ public class Projectile : BaseProjectile
                 isPass = true;
                
                 rb.AddForce(direction * addVelocity * Time.fixedDeltaTime, ForceMode2D.Impulse);
-                //transform.Translate(direction *addVelocity* moveSpeed * Time.fixedDeltaTime);
+                
                 
             }
            
@@ -50,10 +50,9 @@ public class Projectile : BaseProjectile
         {
             rb.AddForce(direction * addVelocity * Time.fixedDeltaTime, ForceMode2D.Impulse);
             Destroy(gameObject, 0.1f);
-            //transform.Translate(direction * addVelocity * moveSpeed * Time.fixedDeltaTime);
+            
         }
-        //transform.position = Vector3.MoveTowards(transform.position, lastPosPlayer.position, moveSpeed * Time.deltaTime);
-        //transform.position = Vector3.MoveTowards(transform.position, lastPosPlayer, moveSpeed * Time.fixedDeltaTime);
+        
 
     }
     protected override void OnTriggerEnter2D(Collider2D other)
@@ -61,5 +60,8 @@ public class Projectile : BaseProjectile
         base.OnTriggerEnter2D(other);
     }
 
-
+    protected override void OnCollisionEnter2D(Collision2D collision)
+    {
+        base.OnCollisionEnter2D(collision);
+    }
 }

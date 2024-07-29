@@ -13,7 +13,7 @@ public class EnemyRangedAttack : Mover
     [SerializeField] private float attackRange;
 
     private Animator anim;
-    public GameObject projectile;
+    //public Transform projectile;
     public Transform firePoint;
 
     private SpriteRenderer sp;
@@ -57,7 +57,7 @@ public class EnemyRangedAttack : Mover
         else
         {
             anim.SetBool("isAttack", true);
-            
+            //Shot(BulletPooling.Instance.prefab);
         }
         
     }
@@ -68,7 +68,7 @@ public class EnemyRangedAttack : Mover
         if (Vector3.Distance(transform.position, wayPoint1.position) <= 0.01f)
         {
             wayPointTarget = wayPoint2;
-            //sp.flipX = true;
+            
             Vector3 localTemp = transform.localScale;
             localTemp.x *= -1;
             transform.localScale = localTemp;
@@ -77,7 +77,7 @@ public class EnemyRangedAttack : Mover
         if (Vector3.Distance(transform.position, wayPoint2.position) <= 0.01f)
         {
             wayPointTarget = wayPoint1;
-            //sp.flipX = false;
+            
             Vector3 localTemp = transform.localScale;
             localTemp.x *= -1;
             transform.localScale = localTemp;
@@ -86,7 +86,12 @@ public class EnemyRangedAttack : Mover
 
     public void Shot()
     {
-        Instantiate(projectile, firePoint.position, Quaternion.identity);
+        Transform prefab = BulletPooling.Instance.prefab;
+        //Instantiate(projectile, firePoint.position, Quaternion.identity);
+        Transform bullet = BulletPooling.Instance.Spawn(prefab);
+        bullet.transform.SetPositionAndRotation(firePoint.position, Quaternion.identity);
+        bullet.gameObject.SetActive(true);
+        //Debug.Log("ban!!");
     }
 
     protected override void Death()
